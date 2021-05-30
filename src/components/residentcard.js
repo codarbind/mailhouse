@@ -76,6 +76,17 @@ const helpWithEmailInput =(e)=>{
   
 }
 
+const checkProperEmailFormat=(emailEntered)=>{
+  let includesAt = emailEntered.includes('@');
+  let atSign = emailEntered.indexOf('@') == emailEntered.lastIndexOf('@');
+  let dotSign = emailEntered.lastIndexOf('.') > emailEntered.lastIndexOf('@');
+  let dotNotLast = emailEntered.length -1 > emailEntered.lastIndexOf('.');
+  let dotNotStart = emailEntered.indexOf('.') != 0;
+  let atNotStart = emailEntered.indexOf('@') !=0;
+  let atNeighborNotDots = emailEntered[emailEntered.lastIndexOf('@') - 1] != '.' && emailEntered[emailEntered.lastIndexOf('@') + 1] != '.'
+  return (atSign && dotSign && includesAt && dotNotLast && dotNotStart && atNotStart && atNeighborNotDots);
+}
+
 
 
 
@@ -85,19 +96,63 @@ export default function RecidentCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [send, setSend] = React.useState(false);
+  const [alarm, setAlarm] = React.useState(false);
   
-function showSendInfo(){
-                    setSend(true);
-                    setTimeout(setSend(false),2000);
-                  }
-
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
       
       };
 
+      const activateSendProcess =(e) =>{
+
+                  e.preventDefault();
+        
+                  setAlarm(false);
+                  setSend(true);
+                  
+                  console.log(e.target.id);
+                                   
+
+                  if(!e.target.id){
+
+                  let id =e.target.firstChild.id.slice(5);
+
+                  id = (id)? id : e.target.id.slice(5); //if ENTER WAS USED TO SUBMIT/SEND
+
+                  meowCopier(
+
+                    {
+                      subjectFetched:id,
+                      copiersmail:document.getElementById('email-'+id).value,
+                 }
+                 ) 
+
+               }else{
+
+                    setAlarm(false);
+                    setSend(true);
+                    
+                  
+                let id =e.target.id.slice(5);
+
+                meowCopier(
+                  {
+                    subjectFetched:id,
+                    copiersmail:document.getElementById('email-'+id).value,
+                  }
+                  )
+
+
+              }
+      }
+
     function meowCopier(detailsOfMailToCopy){
+
+
+      if (!checkProperEmailFormat(detailsOfMailToCopy.copiersmail)){
+        setSend(false);
+        return setAlarm(true);
+      }
 
           var urlencoded;
           urlencoded = new URLSearchParams();
@@ -122,8 +177,6 @@ function showSendInfo(){
                 
             })
               }
-
-  let emailFieldId = props.mailDetails.ccid;
 
   return (
     <Card className={classes.root}>
@@ -178,7 +231,7 @@ function showSendInfo(){
       
           <div>
 
-              <form className={classes.copyform} noValidate autoComplete="on">
+              <form className={classes.copyform} noValidate autoComplete="on" onSubmit={activateSendProcess}  id={'fend-'+props.mailDetails.subject+' '+props.mailDetails.ccid}>
               <TextField id={'email-'+props.mailDetails.subject+' '+props.mailDetails.ccid} label="Email Address" variant="outlined" className={classes.emailField}  />
               <Button
 
@@ -188,65 +241,24 @@ function showSendInfo(){
                   
                 className={classes.submitButton}
 
-                 onClick={(e)=>{
+                 onClick={activateSendProcess}
+
+               
 
 
-                  
-                  //showSendInfo();
-
-                  
-                  setSend(true);
-                
-                  
-
-                  if(!e.target.id){
-
-                  let id =e.target.firstChild.id.slice(5);
-
-                  meowCopier(
-
-                    {
-                      subjectFetched:id,
-                      copiersmail:document.getElementById('email-'+id).value,
-                 }
-                 ) 
-
-               }else{
-
-               // showSendInfo();
-
-                
-                    setSend(true);
-                    
-                  
-
-                  
-                let id =e.target.id.slice(5);
-
-                meowCopier(
-                  {
-                    subjectFetched:id,
-                    copiersmail:document.getElementById('email-'+id).value,
-                  }
-                  )
-
-
-              }}}
-
-
-                 id={'send-'+props.mailDetails.subject+' '+props.mailDetails.ccid}
+                 id={'xend-'+props.mailDetails.subject+' '+props.mailDetails.ccid}
                  
             >
                   <span 
                   
-                  id={'send-'+props.mailDetails.subject+' '+props.mailDetails.ccid} disabled>Send</span>
+                  id={'send-'+props.mailDetails.subject+' '+props.mailDetails.ccid} >Send</span>
 
               </Button>
               </form>
 
               </div>
-         
-          {send && (<SimpleAlerts />) || send && (<SimpleAlerts/>)}
+          {alarm && (<SimpleAlerts severity='error' />) || alarm && (<SimpleAlerts severity='error'  />)}
+          {send && (<SimpleAlerts severity='info' />) || send && (<SimpleAlerts severity='info' />)}
 
         </CardContent>
       </Collapse>
