@@ -169,7 +169,7 @@ export default function RecidentCard(props) {
             redirect: 'follow'
           };
 
-          fetch(`${process.env.REACT_APP_backEndAPI_URL}/meowCopier`, requestOptions)
+          fetch(`${process.env.REACT_APP_BACKEND_URL}/meowCopier`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 //alert("That\'s on its way!!");

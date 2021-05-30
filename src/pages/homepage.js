@@ -66,7 +66,7 @@ function populateEmail(e){
 	console.log(topEmailInputted);
 }
 
-	 fetch(`http://localhost:4000/`)
+	 fetch(`${process.env.REACT_APP_BACKEND_URL}`)
     .then(results=>results.json())
     .then(results=>{
      
