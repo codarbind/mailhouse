@@ -169,12 +169,11 @@ export default function RecidentCard(props) {
             redirect: 'follow'
           };
 
-          fetch(`${process.env.REACT_APP_BACKEND_URL}/meowCopier`, requestOptions)
+          fetch(`${process.env.REACT_APP_BACKEND_URL}/copy`, requestOptions)
             .then(response => response.json())
             .then(result => {
-                //alert("That\'s on its way!!");
+                var lobbyDetails = result._fieldsProto;
               
-                
             })
               }
 
@@ -183,7 +182,7 @@ export default function RecidentCard(props) {
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            {props.mailDetails.subject[0]}
+            {lobbyDetails.subject[0]}
           </Avatar>
         }
         action={
@@ -191,18 +190,18 @@ export default function RecidentCard(props) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={props.mailDetails.subject}
-        subheader={props.mailDetails.whenCreated}
+        title={lobbyDetails.subject}
+        subheader={lobbyDetails.whenCreated}
       />
      
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          {props.mailDetails.snippet}
+          {lobbyDetails.snippet}
           <i>... you have to copy the mail to see the whole body content</i>
         </Typography>
         <Typography>
         <span><AttachFileIcon/></span>
-        {props.mailDetails.attachmentName}
+        {lobbyDetails.attachmentName}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -221,8 +220,8 @@ export default function RecidentCard(props) {
           aria-label="show more"
           >
          
-          <Button variant="contained" color="primary"  onClick={helpWithEmailInput} id={'button-'+props.mailDetails.subject+' '+props.mailDetails.ccid}>
-           <span id={'botton-'+props.mailDetails.subject+' '+props.mailDetails.ccid}>COPY THIS</span>
+          <Button variant="contained" color="primary"  onClick={helpWithEmailInput} id={'button-'+lobbyDetails.subject+' '+lobbyDetails.ccid}>
+           <span id={'botton-'+lobbyDetails.subject+' '+lobbyDetails.ccid}>COPY THIS</span>
           </Button>
         </IconButton>
       </CardActions>
@@ -231,8 +230,8 @@ export default function RecidentCard(props) {
       
           <div>
 
-              <form className={classes.copyform} noValidate autoComplete="on" onSubmit={activateSendProcess}  id={'fend-'+props.mailDetails.subject+' '+props.mailDetails.ccid}>
-              <TextField id={'email-'+props.mailDetails.subject+' '+props.mailDetails.ccid} label="Email Address" variant="outlined" className={classes.emailField}  />
+              <form className={classes.copyform} noValidate autoComplete="on" onSubmit={activateSendProcess}  id={'fend-'+lobbyDetails.subject+' '+lobbyDetails.ccid}>
+              <TextField id={'email-'+lobbyDetails.subject+' '+lobbyDetails.ccid} label="Email Address" variant="outlined" className={classes.emailField}  />
               <Button
 
                   variant="contained"
@@ -246,12 +245,12 @@ export default function RecidentCard(props) {
                
 
 
-                 id={'xend-'+props.mailDetails.subject+' '+props.mailDetails.ccid}
+                 id={'xend-'+lobbyDetails.subject+' '+lobbyDetails.ccid}
                  
             >
                   <span 
                   
-                  id={'send-'+props.mailDetails.subject+' '+props.mailDetails.ccid} >Send</span>
+                  id={'send-'+lobbyDetails.subject+' '+lobbyDetails.ccid} >Send</span>
 
               </Button>
               </form>

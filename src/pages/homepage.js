@@ -6,7 +6,7 @@ import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import background from '../assets/img/mailhouseheader.jpg';
-import ButtonAppBar from '../components/header1';
+import ButtonAppBar from '../components/header';
 
 var homeItems;
 
@@ -103,13 +103,13 @@ return(
 		 </div>
 
        
-          <h3 style={{color:"#007bff"}}>RECENT RESIDENTS</h3>
-          <p>These are some of the recently shared mails/files, copy as many as you like!</p>
+          
     
         <CssBaseline />
       <Container fixed style={{padding:'auto'}}>
       
-      {(isLoaded && (<div><span className={classes.emailFieldLabel}>Enter an Email Address to Use Throughout</span><TextField id='generalEmail' autofocus label="Email Address" variant="outlined" className={classes.emailToCopyTo} placeholder='enter an email address to avoid repetition'/></div>	) )}
+      {(isLoaded && (<div><h3 style={{color:"#007bff"}}>RECENT RESIDENTS</h3>
+          <p>These are some of the recently shared mails/files, copy as many as you like!</p><span className={classes.emailFieldLabel}>Enter an Email Address to Use Throughout</span><TextField id='generalEmail' autofocus label="Email Address" variant="outlined" className={classes.emailToCopyTo} placeholder='enter an email address to avoid repetition'/></div>	) )}
       {(isLoaded && homeItems) || (!isLoaded && (<p>Loading</p>))}
       </Container>
 
