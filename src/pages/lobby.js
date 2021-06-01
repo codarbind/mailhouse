@@ -121,10 +121,9 @@ export default function Meowcopier(props) {
       
       };
 
-      let pathname = window.location.pathname;
-      let ccid = pathname.slice((pathname.lastIndexOf('/') + 1));
-      console.log(ccid);
-
+     let ccid =  ( window.location.search.length > 1)? window.location.search.slice(6) : window.location.pathname.slice((window.location.pathname.lastIndexOf('/') + 1));
+    
+   
 var lobbyDetails;
 
 
@@ -135,9 +134,7 @@ var lobbyDetails;
         
                   setAlarm(false);
                   setSend(true);
-                  
-                  console.log(e.target.id);
-                                   
+                                              
 
                   if(!e.target.id){
 
