@@ -1,6 +1,11 @@
 
 import './App.css';
 import React from 'react';
+import {Component} from 'react';
+import {BrowserRouter, Route} from 'react-router-dom';
+import Meowcopier from './pages/lobby';
+import Homepage from './pages/homepage';
+
 
 import './assets/vendor/bootstrap/css/bootstrap.min.css';
 import './assets/vendor/font-awesome/css/font-awesome.min.css';
@@ -11,14 +16,19 @@ import './assets/css/style.css';
 
 
 
-import Homepage from './pages/homepage';
+
 
 
 function App() {
   return (
     <div className="App">
         
-      <Homepage/>
+     
+
+      <BrowserRouter>
+      <Route exact path ='/' component={Homepage}/>
+      <Route path='/copy' component={Meowcopier}/>
+      </BrowserRouter>
 
     </div>
   );

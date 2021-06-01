@@ -97,6 +97,7 @@ export default function RecidentCard(props) {
   const [expanded, setExpanded] = React.useState(false);
   const [send, setSend] = React.useState(false);
   const [alarm, setAlarm] = React.useState(false);
+  console.log(props.mailDetails);
   
   const handleExpandClick = () => {
     setExpanded(!expanded);

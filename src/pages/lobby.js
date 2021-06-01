@@ -20,6 +20,10 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Icon from '@material-ui/core/Icon';
 import SimpleAlerts from '../components/alert';
+import { useParams } from 'react-router-dom';
+import ResidentCard from '../components/residentcard';
+import Banner from '../components/banner';
+ 
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,7 +69,19 @@ const useStyles = makeStyles((theme) => ({
     height:'55px',
     width:'20%',
     float:'right'
-  }
+  },
+  emailToCopyTo:{
+    width:'80%',
+    marginBottom: '5%',
+    fontColor:'#007bff',
+  },
+  
+  emailFieldLabel:{
+      color:'red',
+      float:'left',
+      marginLeft:'10%',
+      fontWeight:'bold',
+  },
 }));
 
 const helpWithEmailInput =(e)=>{
@@ -92,16 +108,26 @@ const checkProperEmailFormat=(emailEntered)=>{
 
 
 
-export default function RecidentCard(props) {
+export default function Meowcopier(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [send, setSend] = React.useState(false);
   const [alarm, setAlarm] = React.useState(false);
+  const [isLoaded, setIsLoaded] = React.useState(false);
+  const [mailDetails, setMailDetails] = React.useState({});
   
   const handleExpandClick = () => {
     setExpanded(!expanded);
       
       };
+
+      let pathname = window.location.pathname;
+      let ccid = pathname.slice((pathname.lastIndexOf('/') + 1));
+      console.log(ccid);
+
+var lobbyDetails;
+
+
 
       const activateSendProcess =(e) =>{
 
@@ -146,7 +172,7 @@ export default function RecidentCard(props) {
               }
       }
 
-    function meowCopier(detailsOfMailToCopy){
+     function meowCopier(detailsOfMailToCopy){
 
 
       if (!checkProperEmailFormat(detailsOfMailToCopy.copiersmail)){
@@ -154,113 +180,60 @@ export default function RecidentCard(props) {
         return setAlarm(true);
       }
 
-          var urlencoded;
+          let urlencoded;
           urlencoded = new URLSearchParams();
           urlencoded.append('subjectFetched',detailsOfMailToCopy.subjectFetched);
           urlencoded.append('copiersmail',detailsOfMailToCopy.copiersmail);
-          var myHeaders = new Headers();
+          let myHeaders = new Headers();
           myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
 
-          var requestOptions = {
+          let requestOptions = {
             method: 'POST',
             headers: myHeaders,
             body: urlencoded,
             redirect: 'follow'
           };
 
-          fetch(`${process.env.REACT_APP_BACKEND_URL}/copy`, requestOptions)
+         fetch(`${process.env.REACT_APP_BACKEND_URL}/meowCopier`, requestOptions)
             .then(response => response.json())
             .then(result => {
-                var lobbyDetails = result._fieldsProto;
-              
+                //alert("That\'s on its way!!");
             })
               }
 
+
+          let myHeaders = new Headers();
+          myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+          let requestOptions = {
+            method: 'get',
+            headers: myHeaders,
+          };
+          React.useEffect(() =>{
+       fetch(`${process.env.REACT_APP_BACKEND_URL}/copy?ccid=${ccid}`, requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                      
+                      mailDetails.subject = result.subjectFetched;
+                      mailDetails.snippet = result.snippetFetched;
+                      mailDetails.whenCreated = result.whenPosted;
+                      mailDetails.attachmentName = result.attachmentName;
+                      mailDetails.ccid = ccid;
+
+                      setMailDetails(mailDetails);
+                      setIsLoaded(true);
+            }).catch((error) => {
+            console.error('Error:', error);})},[]);
+
+          lobbyDetails = (<ResidentCard mailDetails={mailDetails}/>);
+
+
   return (
-    <Card className={classes.root}>
-      <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            {lobbyDetails.subject[0]}
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title={lobbyDetails.subject}
-        subheader={lobbyDetails.whenCreated}
-      />
-     
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {lobbyDetails.snippet}
-          <i>... you have to copy the mail to see the whole body content</i>
-        </Typography>
-        <Typography>
-        <span><AttachFileIcon/></span>
-        {lobbyDetails.attachmentName}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-          >
-         
-          <Button variant="contained" color="primary"  onClick={helpWithEmailInput} id={'button-'+lobbyDetails.subject+' '+lobbyDetails.ccid}>
-           <span id={'botton-'+lobbyDetails.subject+' '+lobbyDetails.ccid}>COPY THIS</span>
-          </Button>
-        </IconButton>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-      
-          <div>
-
-              <form className={classes.copyform} noValidate autoComplete="on" onSubmit={activateSendProcess}  id={'fend-'+lobbyDetails.subject+' '+lobbyDetails.ccid}>
-              <TextField id={'email-'+lobbyDetails.subject+' '+lobbyDetails.ccid} label="Email Address" variant="outlined" className={classes.emailField}  />
-              <Button
-
-                  variant="contained"
-                  color="primary"
-                  className={classes.button}
-                  
-                className={classes.submitButton}
-
-                 onClick={activateSendProcess}
-
-               
-
-
-                 id={'xend-'+lobbyDetails.subject+' '+lobbyDetails.ccid}
-                 
-            >
-                  <span 
-                  
-                  id={'send-'+lobbyDetails.subject+' '+lobbyDetails.ccid} >Send</span>
-
-              </Button>
-              </form>
-
-              </div>
-          {alarm && (<SimpleAlerts severity='error' />) || alarm && (<SimpleAlerts severity='error'  />)}
-          {send && (<SimpleAlerts severity='info' />) || send && (<SimpleAlerts severity='info' />)}
-
-        </CardContent>
-      </Collapse>
-    </Card>
-  );
+    <div>
+    <Banner />
+    <h3 style={{color:"#007bff"}}><b>{mailDetails.subject}</b></h3>
+    <span className={classes.emailFieldLabel} hidden>Enter an Email Address to Use Throughout</span><TextField hidden id='generalEmail' autofocus label="Email Address" variant="outlined" className={classes.emailToCopyTo} placeholder='enter an email address to avoid repetition'/>
+    {isLoaded && (lobbyDetails) || !isLoaded && (<span>loading</span>)}
+    </div>
+    );
 }
