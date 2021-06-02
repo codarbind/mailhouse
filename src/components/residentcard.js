@@ -197,9 +197,11 @@ export default function RecidentCard(props) {
       />
      
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography variant="body2" color="black" component="p">
           {props.mailDetails.snippet}
+          <p/>
           <i>... you have to copy the mail to see the whole body content</i>
+          <p/>
         </Typography>
         <Typography>
         <span><AttachFileIcon/></span>
