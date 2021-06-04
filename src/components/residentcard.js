@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
+
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
@@ -13,12 +13,12 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Icon from '@material-ui/core/Icon';
+
 import SimpleAlerts from '../components/alert';
 
 const useStyles = makeStyles((theme) => ({
@@ -78,12 +78,12 @@ const helpWithEmailInput =(e)=>{
 
 const checkProperEmailFormat=(emailEntered)=>{
   let includesAt = emailEntered.includes('@');
-  let atSign = emailEntered.indexOf('@') == emailEntered.lastIndexOf('@');
+  let atSign = emailEntered.indexOf('@') === emailEntered.lastIndexOf('@');
   let dotSign = emailEntered.lastIndexOf('.') > emailEntered.lastIndexOf('@');
   let dotNotLast = emailEntered.length -1 > emailEntered.lastIndexOf('.');
-  let dotNotStart = emailEntered.indexOf('.') != 0;
-  let atNotStart = emailEntered.indexOf('@') !=0;
-  let atNeighborNotDots = emailEntered[emailEntered.lastIndexOf('@') - 1] != '.' && emailEntered[emailEntered.lastIndexOf('@') + 1] != '.'
+  let dotNotStart = emailEntered.indexOf('.') !== 0;
+  let atNotStart = emailEntered.indexOf('@') !==0;
+  let atNeighborNotDots = emailEntered[emailEntered.lastIndexOf('@') - 1] !== '.' && emailEntered[emailEntered.lastIndexOf('@') + 1] !== '.'
   return (atSign && dotSign && includesAt && dotNotLast && dotNotStart && atNotStart && atNeighborNotDots);
 }
 
@@ -97,7 +97,6 @@ export default function RecidentCard(props) {
   const [expanded, setExpanded] = React.useState(false);
   const [send, setSend] = React.useState(false);
   const [alarm, setAlarm] = React.useState(false);
-  console.log(props.mailDetails);
   
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -240,7 +239,7 @@ export default function RecidentCard(props) {
 
                   variant="contained"
                   color="primary"
-                  className={classes.button}
+                  
                   
                 className={classes.submitButton}
 

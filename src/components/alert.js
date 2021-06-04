@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SimpleAlerts(props) {
   const classes = useStyles();
-  let showErrorAlert = (props.severity == 'error')? true : false;
+  let showErrorAlert = (props.severity === 'error')? true : false;
   let errorAlert = <Alert severity={props.severity}>That is not a valid email — not sent!</Alert>;
   let infoAlert = <Alert severity={props.severity}>The mail is on its way — sent!</Alert>;
   return (

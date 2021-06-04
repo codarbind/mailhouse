@@ -1,14 +1,8 @@
 import React from 'react';
-import ResidentCard from '../components/residentcard';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import background from '../assets/img/mailhouseheader.jpg';
 import ButtonAppBar from '../components/header';
-
-var homeItems;
 
 const useStyles = makeStyles({
 	emailToCopyTo:{
@@ -33,27 +27,19 @@ const useStyles = makeStyles({
 	},
 	contentP:{
 		margin:'auto',
-		//textAlign:'left'
 	    flexGrow: 1,
 	    fontFamily: "ZCOOL KuaiLe, cursive",
 	    fontWeight: 500,
 	    color: "#0047AB",
 	    fontSize:"25px",
-	    fontWeight:'bold',
 	    marginBottom:'15px', 
 	}
 });
 
-
-
 function Banner(){
 
 const classes = useStyles();
-
-
-const [isLoaded,setIsLoaded] = React.useState(false);
-
-    
+   
 return(
 	<div>
 
