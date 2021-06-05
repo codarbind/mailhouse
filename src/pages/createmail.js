@@ -28,9 +28,13 @@ const useStyles = makeStyles({
 
 function CreateMail(){
 
+
+
 const classes = useStyles();
 
 const [fileOk,setFileOk] = React.useState(false);
+const [copyLink,setCopyLink] = React.useState(false);
+const [ccid,setCcid] = React.useState();
 let filevalidation = () => { 
     const fi = document.getElementById('file'); 
 
@@ -69,6 +73,7 @@ let filevalidation = () => {
    } else{
     setFileOk(true);
     alert('fetching...');
+
    var formdata = new FormData();
 var formDetails = document.querySelector("form");
 var attachmentObject = document.getElementById("file");
@@ -84,13 +89,21 @@ var requestOptions = {
 };
 
 fetch(`${process.env.REACT_APP_BACKEND_URL}/meowsender`, requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
+  .then(response => response.json())
+  .then(result => {
+      setCcid( result);
+
+    console.log(result,ccid);
+    setCopyLink(true);
+
+                })
   .catch(error => console.log('error', error));
 
    }
     
   }
+
+  var linkToCopy = `https://mailhouse.com.ng/copy/${ccid}`;
 
 	   
 return(
@@ -117,10 +130,11 @@ return(
             required
           />
           
-    </Button>
+    </Button><br/>
     <PrivacySwitch /><br/>
-    {fileOk && (<Button className={classes.emailToCopyTo} onClick={meowSender}  variant="contained" color="primary"  type="submit" ><span id="submit">SEND NOW - Get The Link</span></Button>)}
+    {!copyLink && fileOk && (<Button className={classes.emailToCopyTo} onClick={meowSender}  variant="contained" color="primary"  type="submit" ><span id="submit">SEND NOW - Get The Link</span></Button>)}
     </form>
+    {copyLink && (<div><span className={classes.emailFieldLabel}>Below is the link to your mail - Copy it and keep sharing. Ready next min!</span><TextField id='copyLink' variant="outlined" className={classes.emailToCopyTo} value={linkToCopy} readonly/></div>) }
     </Container>
   </div>
   )
