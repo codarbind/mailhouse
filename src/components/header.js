@@ -35,10 +35,9 @@ export default function ButtonAppBar() {
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            <h4>Mail📫House</h4>
+          <Typography variant="h6" className={classes.title} Component={Link} to='/'>
+            <h4 >Mail📫House</h4>
           </Typography>
-          <span><Link className={classes.menuOptions} Component={Link} to='/search'>SEARCH</Link></span>| |
           <Link className={classes.menuOptions} Component={Link} to='/create'>CREATE</Link>
         </Toolbar>
       </AppBar>
