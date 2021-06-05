@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 
 const IOSSwitch = withStyles((theme) => ({
   root: {
-    width: 250,
+    width: 130,
     height: 30,
     padding: 0,
     margin: theme.spacing(1),
@@ -18,7 +18,7 @@ const IOSSwitch = withStyles((theme) => ({
   switchBase: {
     padding: 1,
     '&$checked': {
-      transform: 'translateX(220px)',
+      transform: 'translateX(100px)',
       color: theme.palette.common.white,
       '& + $track': {
         backgroundColor: '#52d869',
