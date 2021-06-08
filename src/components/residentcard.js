@@ -20,6 +20,13 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 import SimpleAlerts from '../components/alert';
+//import LinkToMail from '../components/linktomail';
+
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -97,6 +104,7 @@ export default function RecidentCard(props) {
   const [expanded, setExpanded] = React.useState(false);
   const [send, setSend] = React.useState(false);
   const [alarm, setAlarm] = React.useState(false);
+  const [linkModal, setLinkModal] = React.useState(false);
   
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -109,9 +117,7 @@ export default function RecidentCard(props) {
         
                   setAlarm(false);
                   setSend(true);
-                  
-                  console.log(e.target.id);
-                                   
+                                                  
 
                   if(!e.target.id){
 
@@ -175,14 +181,56 @@ export default function RecidentCard(props) {
                 //alert("That\'s on its way!!");
               
                 
-            })
+               })
               }
 
+
+
+  function LinkToMail(props) {
+
+const [open, setOpen] = React.useState(true);
+
+
+  const handleClose = () => {
+      setOpen(false);
+      setLinkModal(false) ;
+     };
+
+  return (
+    <div >
+      
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        id='linkToMailDiv'
+      >
+
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {props.mailDetails.subject}
+          </DialogContentText>
+        </DialogContent>
+
+        <DialogTitle id="alert-dialog-title">https://mailhouse.com.ng/copy/{props.mailDetails.ccid}</DialogTitle>
+
+      </Dialog>
+
+    </div>
+  );
+}
+
+    function showLink (){
+      setLinkModal(true);
+    }
+
+   
   return (
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
+          <Avatar aria-label="subject" className={classes.avatar}>
             {props.mailDetails.subject[0]}
           </Avatar>
         }
@@ -208,11 +256,11 @@ export default function RecidentCard(props) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="like this">
           <FavoriteIcon />
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
+        <IconButton aria-label="share" >
+          <ShareIcon onClick={showLink}/>
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
@@ -220,7 +268,7 @@ export default function RecidentCard(props) {
           })}
           onClick={handleExpandClick}
           aria-expanded={expanded}
-          aria-label="show more"
+          aria-label="copy this"
           >
          
           <Button variant="contained" color="primary"  onClick={helpWithEmailInput} id={'button-'+props.mailDetails.subject+' '+props.mailDetails.ccid}>
@@ -259,11 +307,12 @@ export default function RecidentCard(props) {
               </form>
 
               </div>
-          {alarm && (<SimpleAlerts severity='error' />) || alarm && (<SimpleAlerts severity='error'  />)}
-          {send && (<SimpleAlerts severity='info' />) || send && (<SimpleAlerts severity='info' />)}
-
+          {alarm && (<SimpleAlerts severity='error' />) }
+          {send && (<SimpleAlerts severity='info' />) }
+          
         </CardContent>
       </Collapse>
+      {linkModal && (<LinkToMail mailDetails={props.mailDetails} />)}
     </Card>
   );
 }
