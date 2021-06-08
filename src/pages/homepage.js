@@ -37,12 +37,16 @@ const [isLoaded,setIsLoaded] = React.useState(false);
     .then(results=>{
      
   homeItems =   results.map(result=>{
+  	
+
   	var mailDetails = {
   		subject:result._fieldsProto.subject.stringValue,
   		snippet:result._fieldsProto.snippet.stringValue,
   		whenCreated:result._fieldsProto.whenCreated.stringValue.slice(4,15),
   		attachmentName:result._fieldsProto.attachmentName.stringValue,
   		ccid:result._fieldsProto.ccid.stringValue,
+  		countTimesCopied:result._fieldsProto.countTimesCopied.integerValue,
+  		uniqueCopiersMail:result._fieldsProto.uniqueCopiersMail.arrayValue.values.length,
 
   	};
 
