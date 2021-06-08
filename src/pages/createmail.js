@@ -72,7 +72,6 @@ let filevalidation = () => {
     setFileOk(false);
    } else{
     setFileOk(true);
-    alert('fetching...');
 
    var formdata = new FormData();
 var formDetails = document.querySelector("form");
@@ -92,8 +91,6 @@ fetch(`${process.env.REACT_APP_BACKEND_URL}/meowsender`, requestOptions)
   .then(response => response.json())
   .then(result => {
       setCcid( result);
-
-    console.log(result,ccid);
     setCopyLink(true);
 
                 })
