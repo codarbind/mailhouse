@@ -20,13 +20,15 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 import SimpleAlerts from '../components/alert';
-//import LinkToMail from '../components/linktomail';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+
+import Badge from '@material-ui/core/Badge';
+import SimpleBadge from '../components/badge';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -256,12 +258,12 @@ const [open, setOpen] = React.useState(true);
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="like this">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share" >
-          <ShareIcon onClick={showLink}/>
-        </IconButton>
+
+      <SimpleBadge mailDetails={props.mailDetails}/>
+      <IconButton>
+        <ShareIcon onClick={showLink}/>
+      </IconButton>
+       
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
