@@ -186,6 +186,8 @@ var lobbyDetails;
                       mailDetails.whenCreated = result.whenPosted;
                       mailDetails.attachmentName = result.attachmentName;
                       mailDetails.ccid = ccid;
+                      mailDetails.countTimesCopied = result.countTimesCopied;
+                      mailDetails.uniqueCopiersMail = result.uniqueCopier;
 
                       setMailDetails(mailDetails);
                       setIsLoaded(true);
