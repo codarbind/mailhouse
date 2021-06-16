@@ -198,7 +198,8 @@ var lobbyDetails;
   return (
     <div>
      <Helmet>
-        <title>{mailDetails.subject} - Mailhouse</title>
+        <title>{`${mailDetails.subject} - Mailhouse`}</title>
+        
     </Helmet>
     <Banner />
     <h3 style={{color:"#007bff"}}><b>{mailDetails.subject}</b></h3>

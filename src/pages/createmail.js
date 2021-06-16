@@ -6,6 +6,7 @@ import Banner from '../components/banner';
 import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import PrivacySwitch from '../components/privacyswitch';
+import {Helmet} from "react-helmet"
 
 
 const useStyles = makeStyles({
@@ -105,6 +106,9 @@ fetch(`${process.env.REACT_APP_BACKEND_URL}/meowsender`, requestOptions)
 	   
 return(
 	<div>
+   <Helmet>
+        <title>{`Share Mail/File to Millions - Mailhouse`}</title>
+    </Helmet>
 
     <Banner />
     <Container fixed style={{padding:'auto'}}>
