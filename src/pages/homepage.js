@@ -4,6 +4,7 @@ import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Banner from '../components/banner';
+import {Helmet} from "react-helmet";
 
 var homeItems;
 
@@ -61,6 +62,10 @@ setIsLoaded(true);
     
 return(
 	<div>
+	<Helmet>
+	<title>{`Home - Mailhouse`}</title>
+	</Helmet>
+
 
     <Banner />
     <Container fixed style={{padding:'auto'}}>

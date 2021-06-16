@@ -11,7 +11,7 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+
 import ShareIcon from '@material-ui/icons/Share';
 
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -27,7 +27,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import Badge from '@material-ui/core/Badge';
 import SimpleBadge from '../components/badge';
 
 const useStyles = makeStyles((theme) => ({
