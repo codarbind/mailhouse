@@ -21,8 +21,11 @@ const useStyles = makeStyles((theme) => ({
   },
   menuOptions:{
     color:'white'
-
   },
+  headerName:{
+    decoration:'none',
+    color:'white',
+  }
 }));
 
 export default function ButtonAppBar() {
@@ -33,10 +36,10 @@ export default function ButtonAppBar() {
       <AppBar position="static">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
+           
           </IconButton>
           <Typography variant="h6" className={classes.title} Component={Link} to='/'>
-            <h4 >Mail📫House</h4>
+           <h4 ><Link to='/' className={classes.headerName}> Mail📫House</Link></h4>
           </Typography>
           <Link className={classes.menuOptions} Component={Link} to='/create'>CREATE</Link>
         </Toolbar>

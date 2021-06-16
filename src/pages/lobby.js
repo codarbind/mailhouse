@@ -4,6 +4,7 @@ import { red } from '@material-ui/core/colors';
 import TextField from '@material-ui/core/TextField';
 import ResidentCard from '../components/residentcard';
 import Banner from '../components/banner';
+import {Helmet} from 'react-helmet';
  
 
 const useStyles = makeStyles((theme) => ({
@@ -196,6 +197,9 @@ var lobbyDetails;
 
   return (
     <div>
+     <Helmet>
+        <title>{mailDetails.subject} - Mailhouse</title>
+    </Helmet>
     <Banner />
     <h3 style={{color:"#007bff"}}><b>{mailDetails.subject}</b></h3>
     <span className={classes.emailFieldLabel} hidden>Enter an Email Address to Use Throughout</span><TextField hidden id='generalEmail' autofocus label="Email Address" variant="outlined" className={classes.emailToCopyTo} placeholder='enter an email address to avoid repetition'/>
