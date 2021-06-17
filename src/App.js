@@ -6,6 +6,9 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Meowcopier from './pages/lobby';
 import Homepage from './pages/homepage';
 import CreateMail from './pages/createmail';
+import Search from './pages/search';
+import About from './pages/about'
+import Signup from './pages/signup'
 
 
 import './assets/vendor/bootstrap/css/bootstrap.min.css';
@@ -30,7 +33,10 @@ function App() {
       <Route exact path ='/' component={Homepage}/>
       <Route path='/copy' component={Meowcopier}/>
       <Route path='/create' component={CreateMail}/>
-      
+      <Route path='/search' component={Search}/>
+      <Route path='/about' component={About}/>
+      <Route path='/signup' component={Signup}/>
+
       
       </BrowserRouter>
 
