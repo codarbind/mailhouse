@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {Link} from 'react-router-dom';
+import MenuGrid from '../components/menugrid';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,8 +20,14 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     paddingTop:'2%',
   },
-  menuOptions:{
-    color:'white'
+  menuDiv:{
+    color:'white',
+    float:'right',
+    marginLeft:'60%',
+  },
+  menuoptions:{
+    marginLeft:'7px',
+    color:'white',
   },
   headerName:{
     decoration:'none',
@@ -38,11 +45,15 @@ export default function ButtonAppBar() {
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
            
           </IconButton>
-          <Typography variant="h6" className={classes.title} Component={Link} to='/'>
+          <Typography variant="h6" className={classes.menuButton} Component={Link} to='/'>
            <h4 ><Link to='/' className={classes.headerName}> Mail📫House</Link></h4>
           </Typography>
-          <Link className={classes.menuOptions} Component={Link} to='/create'>CREATE</Link>
+          <div className={classes.menuDiv}>
+          <MenuGrid/>
+          </div>
+         
         </Toolbar>
+    
       </AppBar>
     </div>
   );
