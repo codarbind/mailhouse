@@ -35,12 +35,7 @@ export default function MenuGrid() {
         <Grid item xs>
       <Link  className={classes.menuoptions}  Component={Link} to='/signup'>SIGNUP</Link>
         </Grid>
-        <Grid item xs>
-     <Link  className={classes.menuoptions}  Component={Link} to='/about'>ABOUT</Link>
-        </Grid>
-       <Grid item xs>
-     <Link  className={classes.menuoptions}  Component={Link} to='/search'>SEARCH</Link>
-        </Grid>
+          
         </Grid>
     </div>
   );
