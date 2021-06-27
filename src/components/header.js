@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {Link} from 'react-router-dom';
 import MenuGrid from '../components/menugrid';
+import Menumenu from '../components/menumenu';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    marginTop: '15px',
   },
   title: {
     flexGrow: 1,
@@ -23,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   menuDiv:{
     color:'white',
     float:'right',
-    marginLeft:'60%',
+    marginLeft:'65%',
   },
   menuoptions:{
     marginLeft:'7px',
@@ -37,20 +39,54 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar() {
   const classes = useStyles();
+  const [isMobile, setIsMobile] = React.useState(window.innerWidth<=425?true:false);
+
+ /* let screenWidth = window.outerWidth;
+  function(){
+  if (screenWidth<=425){
+    setIsMobile(true);
+
+  }else{
+    setIsMobile(false);
+  }
+}
+
+
+const [toggle, setToggle] = useState(msg ? true : false);
+
+let JIO = function(){
+  if (window.innerWidth<=425){
+    console.log(2)
+    setIsMobile(true);
+
+  }else{
+    console.log(1)
+    setIsMobile(false);
+
+  }}
+*/
+
+
+
+
+
+
+
+
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} >
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-           
-          </IconButton>
+        {isMobile &&(<div><Menumenu /></div>)}
           <Typography variant="h6" className={classes.menuButton} Component={Link} to='/'>
-           <h4 ><Link to='/' className={classes.headerName}> Mail📫House</Link></h4>
+           <h4 ><Link to='/' className={classes.headerName}> MailHouse</Link></h4>
+           
           </Typography>
-          <div className={classes.menuDiv}>
+
+          {!isMobile &&(<div className={classes.menuDiv}>
           <MenuGrid/>
-          </div>
+          </div>)}
          
         </Toolbar>
     
