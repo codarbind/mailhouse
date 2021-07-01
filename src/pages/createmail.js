@@ -129,8 +129,7 @@ return(
             id="file"
             name = "attachment"
             required
-            multiple
-            accept='.pdf, .mkv, .mp3, .mp4, .DOC, .DOCX, .HTML, .HTM, .XLS, .XLSX, .PPT, .PPTX, .jpeg, .jpg, .bmp, .png.TXT'
+            accept='.pdf, .mkv, .mp3, .mp4, .DOC, .DOCX, .HTML, .HTM, .XLS, .XLSX, .PPT, .PPTX, .jpeg, .jpg, .bmp, .png, .TXT'
           />
           
     </Button><br/>
