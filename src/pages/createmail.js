@@ -54,7 +54,7 @@ let filevalidation = () => {
         }  else { 
 
           alert('File size ok, proceed');
-          if( (document.getElementById('description').value.length === 0) && (document.getElementById('senderEmail').value.length === 0)){
+          if( (document.getElementById('description').value.length === 0) && (document.getElementById('password').value.length === 0)){
           setFileOk(false);
           }else{
             setFileOk(true);
@@ -68,7 +68,7 @@ let filevalidation = () => {
 
   let meowSender = (e) =>{
     e.preventDefault();
-   if( (document.getElementById('description').value.length === 0) || (document.getElementById('mailSubject').value.length === 0)){
+   if( (document.getElementById('description').value.length === 0) || (document.getElementById('password').value.length === 0)){
     alert('you need to complete the required fields, please');
     setFileOk(false);
    } else{
@@ -78,8 +78,8 @@ let filevalidation = () => {
 var formDetails = document.querySelector("form");
 var attachmentObject = document.getElementById("file");
 formdata.append("attachment", attachmentObject.files[0], attachmentObject.files[0].name);
-formdata.append("sendersmail", document.getElementById('senderEmail').value);
-formdata.append("subject", document.getElementById('mailSubject').value);
+formdata.append("sendersmail", document.getElementById('password').value);
+formdata.append("subject", document.getElementById('password').value);
 formdata.append("mailbody", document.getElementById('description').value);
 formdata.append("coverage", document.getElementById('privacy').checked);
 formdata.append("date", new Date().toString());
@@ -113,10 +113,12 @@ return(
     <Banner />
     <Container fixed style={{padding:'auto'}}>
     <form id='formDetails'>
-    <div><h3 style={{color:"#007bff"}}>MAIL A FILE - GET A LINK</h3></div>
-    <span className={classes.emailFieldLabel}>Enter Your Email Address - <i>optional</i></span><TextField id='senderEmail' autofocus label="Email Address" variant="outlined" className={classes.emailToCopyTo} placeholder='enter an email address to have this mail in your dashboard'/>
-    <span className={classes.emailFieldLabel}>Enter The Subject of This Mail - <i>required</i></span><TextField required onMouseOut={filevalidation} id='mailSubject' label="Mail Subject" variant="outlined" className={classes.emailToCopyTo} placeholder='enter the subject of this email and file'/>
-    <span className={classes.emailFieldLabel}>What is This Mail/File About? - <i>required</i></span><TextField required onMouseOut={filevalidation} multiline id="description" label="Describe the Mail" variant="outlined" rows={10} className={classes.emailToCopyTo} rowsMax={Infinity} placeholder="Describe the file and reason why people should copy it here. This should be your cover letter if it is a CV/Resume you are attaching" />
+    <div><h3 style={{color:"#007bff"}}>UPLOAD NEW EDITION</h3></div>
+    <span className={classes.emailFieldLabel}>Enter The Subject of This Edition </span><TextField required id='password' label="Edition Subject" variant="outlined" className={classes.emailToCopyTo} />
+    <span className={classes.emailFieldLabel}>Enter Your ID Number </span><TextField type='password' id='password' autofocus label="ID Number" variant="outlined" className={classes.emailToCopyTo}/>
+    
+    {/*<!--span className={classes.emailFieldLabel}>What is This Mail/File About? - <i>required</i></span->
+    <TextField required onMouseOut={filevalidation} multiline id="description" label="Describe the Mail" variant="outlined" rows={10} className={classes.emailToCopyTo} rowsMax={Infinity} placeholder="Describe the file and reason why people should copy it here. This should be your cover letter if it is a CV/Resume you are attaching" />*/}
     <Button
         
         variant="contained"
@@ -133,10 +135,10 @@ return(
           />
           
     </Button><br/>
-    <PrivacySwitch /><br/>
-    {!copyLink && fileOk && (<Button className={classes.emailToCopyTo} onClick={meowSender}  variant="contained" color="primary"  type="submit" ><span id="submit">SEND NOW - Get The Link</span></Button>)}
+
+    {fileOk && (<Button className={classes.emailToCopyTo} onClick={meowSender}  variant="contained" color="primary"  type="submit" ><span id="submit">PUBLISH NOW!</span></Button>)}
     </form>
-    {copyLink && (<div><span className={classes.emailFieldLabel}>Below is the link to your mail - Copy it and keep sharing. Ready next min!</span><TextField id='copyLink' variant="outlined" className={classes.emailToCopyTo} value={linkToCopy} readonly/></div>) }
+    
     </Container>
   </div>
   )

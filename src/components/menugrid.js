@@ -27,14 +27,9 @@ export default function MenuGrid() {
     <div className={classes.root}>
          <Grid container>
           <Grid item xs>
-      <Link className={classes.menuoptions} Component={Link} to='/'>HOME</Link>
+      <Link className={classes.menuoptions} Component={Link} to='/'> </Link>
         </Grid>
-        <Grid item xs>
-      <Link className={classes.menuoptions} Component={Link} to='/create'>CREATE</Link>
-        </Grid>
-        <Grid item xs>
-      <Link  className={classes.menuoptions}  Component={Link} to='/signup'>SIGNUP</Link>
-        </Grid>
+
           
         </Grid>
     </div>

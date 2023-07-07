@@ -44,13 +44,8 @@ return(
 	<div>
 
 	<ButtonAppBar/>
-		 <div className={classes.poster}>
-		 <div className={classes.contentP}>
-		 <p>👌🏽Signing up not compulsory🤵🏽</p>
-		 <p>🔬 Talent head hunting made easier 🛠</p>
-		 <p>🗨 Write cold emails without disturbing others 📨</p>
-		 <p> ✔ Enjoy files through mails from around the world 🌍 </p>
-		 </div>
+		 <div >
+	
 		 </div>        
      <CssBaseline />
    
