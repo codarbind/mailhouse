@@ -80,7 +80,7 @@ let JIO = function(){
         <Toolbar>
         {isMobile &&(<div><Menumenu /></div>)}
           <Typography variant="h6" className={classes.menuButton} Component={Link} to='/'>
-           <h4 ><Link to='/' className={classes.headerName}> MailHouse</Link></h4>
+           <h4 ><Link to='/' className={classes.headerName}> DCL</Link></h4>
            
           </Typography>
 
